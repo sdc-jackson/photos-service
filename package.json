@@ -1,0 +1,17 @@
+{
+  "name": "photos-service",
+  "version": "0.0.1",
+  "description": "Photos service for AirBnB clone",
+  "author": "sunnymakin",
+  "license": "",
+  "engines": {
+    "node": ">=6.13.0"
+  },
+  "scripts": {
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor"
+  }
+}
