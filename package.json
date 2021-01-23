@@ -8,16 +8,23 @@
     "node": ">=6.13.0"
   },
   "scripts": {
-    "start": "node server",
-    "seed": "node ./database/seed.js"
+    "start": "nodemon server",
+    "seed": "node ./database/seed.js",
+    "lint": "eslint **/*.jsx",
+    "test": "jest"
   },
   "dependencies": {
+    "aws-sdk": "^2.830.0",
     "express": "^4.17.1",
     "mocha": "^8.2.1",
     "mongoose": "^5.11.13",
     "react": "^17.0.1"
   },
   "devDependencies": {
-    "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor"
+    "@shelf/jest-mongodb": "^1.2.3",
+    "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor",
+    "jest": "^26.6.3",
+    "webpack": "^5.16.0",
+    "webpack-cli": "^4.4.0"
   }
 }

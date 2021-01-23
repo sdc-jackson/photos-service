@@ -34,3 +34,5 @@ Photo.deleteMany({}).then(() => {
     }
   }
 });
+
+module.exports.Photo = Photo;
