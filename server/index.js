@@ -6,10 +6,8 @@ const PORT = 5005;
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
-app.get('/', (req, res) => {
-  res.send('App is Up!');
-});
+app.use(express.static(__dirname + '/../client/dist'));
+app.use(express.static(__dirname + '/../public'));
 
 app.get('/getPhotosByRoomID', (req, res) => {
   db.getPhotosByRoomId(req.query.roomid, (photos) => {
