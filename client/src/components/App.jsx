@@ -12,10 +12,4 @@ export default class App extends React.Component {
       <PhotoGrid />
     );
   }
-
-  componentDidMount() {
-    $.get('/getPhotosByRoomID?roomid=100', results => {
-    });
-
-  }
 }
