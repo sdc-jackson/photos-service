@@ -1,3 +1,64 @@
-body {
-  background-color: teal;
+.photo-grid {
+  display: flex;
 }
+
+.flex-container-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: auto;
+}
+
+.flex-container-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.responsive-img {
+  width: 100%;
+  height: auto;
+  margin: 1px;
+}
+.responsive-img:hover {
+  opacity:0.8;
+  transition: 0.5s;
+}
+
+.primary-img {
+  border-radius: 5px 0 0 5px;
+  min-width: 150px;
+  max-width: 300px;
+}
+
+ .secondary-img {
+  min-width: 75px;
+  max-width: 150px;
+}
+
+.secondary-img-top {
+  border-radius: 0 5px 0 0;
+}
+
+.secondary-img-bottom {
+  border-radius: 0 0 5px 0;
+}
+
+.photo-btn-container {
+  position: relative;
+}
+
+.photo-btn-container .photo-btn {
+  position: absolute;
+  top: 75%;
+  left: 50%;
+  padding: 5px;
+  border-radius: 3px;
+  border-style: solid;
+  border-width: 0.25px;
+  font-size: 7px;
+}
+
