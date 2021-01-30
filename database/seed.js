@@ -25,7 +25,7 @@ Photo.deleteMany({}).then(() => {
         photo_id: i.toString() + j.toString(),
         caption: j + 'cozy' + i,
         is_primary: isPrimary,
-        storage_url: ''
+        storage_url: 'https://hr-airbnb-bucket.s3.us-east-2.amazonaws.com/' + i.toString() + j.toString()
       });
       propertyPhoto.save().then(() => {
         console.log('saved in db..');
