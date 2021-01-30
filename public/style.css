@@ -6,7 +6,6 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: center;
   width: 100%;
   height: auto;
 }
@@ -32,15 +31,11 @@
   border-radius: 6px 0 0 6px;
   min-width: 150px;
   max-width: 300px;
-  max-height: 300px;
-  min-height: 150px;
 }
 
  .secondary-img {
   min-width: 75px;
   max-width: 150px;
-  max-height: 150px;
-  min-height: 75px;
 }
 
 .secondary-img-top {
