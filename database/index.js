@@ -1,17 +1,13 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/airbnb', {
+const { Photo } = require('./schema.js');
+const { config } = require('../config.js');
+
+const { db: { host, port, name } } = config;
+
+mongoose.connect(`mongodb://${host}:${port}/${name}`, {
   useNewUrlParser: true,
   useCreateIndex: true,
   useUnifiedTopology: true
-});
-
-const Photo = mongoose.model('Photo', {
-  room_id: String,
-  name: String,
-  photo_id: String,
-  caption: String,
-  is_primary: Boolean,
-  storage_url: String
 });
 
 const getPhotosByRoomId = (room_id, cb) => {

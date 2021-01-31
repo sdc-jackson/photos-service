@@ -10,17 +10,21 @@
   "scripts": {
     "build": "webpack -d --watch",
     "start": "nodemon server",
-    "seed": "node ./database/seed.js",
+    "seed": "node ./database/seed.js && exit 0",
     "lint": "eslint **/*.jsx",
     "test": "jest"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.4.1",
+    "aws-sdk": "^2.834.0",
+    "axios": "^0.21.1",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "jquery": "^3.1.1",
     "mocha": "^8.2.1",
     "mongoose": "^5.11.13",
     "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "jquery": "^3.1.1"
+    "react-dom": "^17.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.4.0",
@@ -31,7 +35,11 @@
     "babel-loader": "^8.0.5",
     "css-loader": "^5.0.1",
     "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor",
+    "faker": "^5.2.0",
+    "fs": "0.0.1-security",
     "jest": "^26.6.3",
+    "lorem-picsum": "^1.0.0",
+    "path": "^0.12.7",
     "react-test-renderer": "^17.0.1",
     "style-loader": "^2.0.0",
     "webpack": "^4.29.6",
