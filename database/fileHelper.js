@@ -13,7 +13,6 @@ const getRandomImage = async () => {
     method: 'GET',
     responseType: 'stream'
   });
-console.log(imageStream);
   return imageStream;
 }
 

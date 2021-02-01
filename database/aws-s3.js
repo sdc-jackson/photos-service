@@ -1,8 +1,16 @@
 const { config } = require('../config.js');
 const { S3Client, ListBucketsCommand, CreateBucketCommand, PutObjectCommand, DeleteBucketCommand } = require('@aws-sdk/client-s3');
-const { aws: { AWS_REGION, AWS_BUCKET_NAME } } = config;
+const { aws: { AWS_REGION, AWS_BUCKET_NAME, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY } } = config;
+const AWS = require('aws-sdk');
+
+const s3v2 = new AWS.S3();
 
 const s3 = new S3Client({ region: process.env.AWS_REGION });
+
+AWS.config.update({
+  accessKeyId: AWS_ACCESS_KEY_ID,
+  secretAccessKey: AWS_SECRET_ACCESS_KEY
+});
 
 // Get all buckets
 const getBuckets = async () => {
@@ -30,6 +38,8 @@ const createBucket = async () => {
   }
 }
 
+// deletes an empty bucket
+
 const deleteBucket = async () => {
   const bucketParams = {
     Bucket: AWS_BUCKET_NAME,
@@ -44,9 +54,9 @@ const deleteBucket = async () => {
   }
 }
 
-// uploads a file to bucket
+// uploads a file to bucket using aws v3
 
-const uploadFile = async (fileStream, fileName) => {
+const uploadFileV3 = async (fileStream, fileName) => {
   let uploadParams = {
     Body: fileStream.data,
     Key: fileName,
@@ -62,6 +72,27 @@ const uploadFile = async (fileStream, fileName) => {
   } catch (err) {
     console.log('Error in file upload: ', err);
   }
+}
+
+// uploads a file to bucket using aws v2
+
+const uploadFile = async (fileStream, fileName) => {
+  let uploadParams = {
+    Body: fileStream.data,
+    Key: fileName,
+    ACL: 'public-read',
+    Bucket: AWS_BUCKET_NAME,
+    ContentType: 'image/jpeg',
+  }
+
+  s3v2.upload(uploadParams, (err, data) => {
+    if (err) {
+      console.log(err);
+    }
+    if (data) {
+      return data.Location;
+    }
+  });
 }
 
 module.exports = {

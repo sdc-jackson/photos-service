@@ -19,11 +19,12 @@ Photo.deleteMany({}).then(() => {
 });
 
 const seed = async() => {
-  await deleteBucket();
+  // deleteBucket can be only used if bucket is empty
+  // await deleteBucket();
   await createBucket();
-  for (let i = 100; i < 101; i++) {
+  for (let i = 100; i < 200; i++) {
     let isPrimary = true;
-    for (let j = 100; j < 101; j++) {
+    for (let j = 100; j < 105; j++) {
       let imageName = faker.commerce.productAdjective();
       let imageStream = await getRandomImage();
       let uploadURL = await uploadFile(imageStream, imageName);
@@ -36,7 +37,7 @@ const seed = async() => {
         storage_url: uploadURL
       });
       propertyPhoto.save().then(() => {
-        console.log('saved in db..');
+        console.log('saved photo ',j ,' in db and s3 for room id: ', i);
       });
       isPrimary = false;
     }
