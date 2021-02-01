@@ -79,20 +79,25 @@ const uploadFileV3 = async (fileStream, fileName) => {
 const uploadFile = async (fileStream, fileName) => {
   let uploadParams = {
     Body: fileStream.data,
-    Key: fileName,
+    Key: `${fileName}.jpg`,
     ACL: 'public-read',
     Bucket: AWS_BUCKET_NAME,
     ContentType: 'image/jpeg',
   }
 
-  s3v2.upload(uploadParams, (err, data) => {
-    if (err) {
-      console.log(err);
-    }
-    if (data) {
-      return data.Location;
-    }
+  return new Promise((resolve, reject) => {
+    s3v2.upload(uploadParams, (err, data) => {
+      if (err) {
+        console.log(err);
+        reject(err);
+      }
+      if (data) {
+        resolve(data.Location);
+      }
+    });
   });
+
+
 }
 
 module.exports = {
