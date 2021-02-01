@@ -27,7 +27,7 @@ const seed = async() => {
     for (let j = 100; j < 105; j++) {
       let imageName = faker.commerce.productAdjective();
       let imageStream = await getRandomImage();
-      let uploadURL = await uploadFile(imageStream, imageName);
+      let uploadURL = await uploadFile(imageStream, imageName + i.toString() + j.toString());
       let propertyPhoto = new Photo({
         room_id: i,
         name: imageName,
