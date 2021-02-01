@@ -4,20 +4,29 @@ export default class PhotoGrid extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      primaryPhoto: '',
-      photoTopLeft: '',
-      photoTopRight: '',
-      photoBottomLeft: '',
-      photoBottomRight: ''
+      roomId: null,
+      primaryPhoto: null,
+      photoTopLeft: null,
+      photoTopRight: null,
+      photoBottomLeft: null,
+      photoBottomRight: null
     };
   }
 
-  componentDidMount() {
-    this.fetchPhotos();
+  static getDerivedStateFromProps(props, state) {
+    return {
+      roomId: props.roomId
+    };
+  }
+
+  componentDidUpdate() {
+    if (this.state.primaryPhoto === null) {
+      this.fetchPhotos();
+    }
   }
 
   fetchPhotos() {
-    fetch('getPhotosByRoomId?roomid=100')
+    fetch(`/rooms/${this.state.roomId}/getPhotosByRoomId`)
       .then((response) => response.json())
       .then((photos) => {
         let primaryPhoto = photos.find(photo => photo.is_primary);

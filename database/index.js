@@ -12,7 +12,11 @@ mongoose.connect(`mongodb://${host}:${port}/${name}`, {
 
 const getPhotosByRoomId = (room_id, cb) => {
   Photo.find({room_id}, (err, photos) => {
-    cb(photos);
+    if (err) {
+      cb(err, null);
+    } else {
+      cb(null, photos);
+    }
   });
 }
 

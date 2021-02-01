@@ -6,12 +6,15 @@ const PORT = 5005;
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(express.static(__dirname + '/../client/dist'));
-app.use(express.static(__dirname + '/../public'));
+app.use('/rooms/:id', express.static(__dirname + '/../client/dist'));
+app.use('/rooms/:id', express.static(__dirname + '/../public'));
 
-app.get('/getPhotosByRoomID', (req, res) => {
-  db.getPhotosByRoomId(req.query.roomid, (photos) => {
-    res.send(photos);
+app.get('/rooms/:id/getPhotosByRoomID', (req, res) => {
+  db.getPhotosByRoomId(req.params.id, (err, photos) => {
+    if (err) {
+      res.status(500).send(err);
+    }
+    res.status(200).send(photos);
   });
 });
 
