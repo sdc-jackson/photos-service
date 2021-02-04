@@ -41,6 +41,11 @@ export default class PhotoGrid extends React.Component {
       });
   }
 
+  handleShowAllPhotosButtonClick(e) {
+    e.preventDefault();
+    this.props.showModal();
+  }
+
   render() {
     return (
       <div className = 'photo-grid'>
@@ -54,7 +59,7 @@ export default class PhotoGrid extends React.Component {
             <img className='responsive-img secondary-img secondary-img-top' src = {this.state.photoTopRight} alt = 'Photo Unavailable'/>
             <div className = 'photo-btn-container'>
               <img className = 'responsive-img secondary-img secondary-img-bottom' src = {this.state.photoBottomRight} alt = 'Photo Unavailable'/>
-              <button className = 'photo-btn'>Show All Photos</button>
+              <button className = 'photo-btn' onClick={this.handleShowAllPhotosButtonClick.bind(this)}>Show All Photos</button>
             </div>
           </div>
         </div>
