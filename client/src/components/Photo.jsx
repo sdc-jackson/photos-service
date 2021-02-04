@@ -8,7 +8,7 @@ export default class Photo extends React.Component {
   render() {
     return (
       <div>
-        <img src = {this.props.imageURL} />
+        <img className = 'photo-carousel-body-img' src = {this.props.imageURL} />
       </div>
     );
   }

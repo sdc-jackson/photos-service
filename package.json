@@ -11,11 +11,12 @@
     "build": "webpack -d --watch",
     "start": "nodemon server",
     "seed": "node ./database/seed.js && exit 1",
-    "lint": "eslint **/*.jsx",
+    "lint": "eslint **/*.jsx ./database/*.js ./server/*.js",
     "test": "jest"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.4.1",
+    "@fortawesome/fontawesome-free": "^5.15.2",
     "aws-sdk": "^2.834.0",
     "axios": "^0.21.1",
     "dotenv": "^8.2.0",

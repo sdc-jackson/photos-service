@@ -1,5 +1,6 @@
 import React from 'react';
 import Photo from './Photo.jsx';
+import FontAwesome from '@fortawesome/fontawesome-free/js/all.js';
 
 export default class PhotosModal extends React.Component {
   constructor(props) {
@@ -10,9 +11,9 @@ export default class PhotosModal extends React.Component {
       photoArray: [],
       currentPhoto: '',
       currentPhotoIndex: 0,
-      nextVisibility: 'show',
-      previousVisibility: 'hidden'
-    }
+      nextVisibility: 'inline',
+      previousVisibility: 'none'
+    };
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -22,26 +23,32 @@ export default class PhotosModal extends React.Component {
   }
 
   componentDidUpdate() {
-    if (this.state.photoCount == 0) {
+    if (this.state.photoCount === 0) {
       this.fetchPhotos();
     }
   }
 
   fetchPhotos() {
     fetch(`/rooms/${this.state.roomId}/getPhotosByRoomId`)
-    .then((response) => response.json())
-    .then((photos) => {
-      this.setState({
-        photoArray: photos,
-        photoCount: photos.length,
-        currentPhoto: photos[0]
+      .then((response) => response.json())
+      .then((photos) => {
+        this.setState({
+          photoArray: photos,
+          photoCount: photos.length,
+          currentPhoto: photos[0]
+        });
       });
-    });
   }
 
   handleCloseButtonClick(e) {
     e.preventDefault();
     this.props.hideModal();
+    this.setState({
+      currentPhoto: this.state.photoArray[0],
+      currentPhotoIndex: 0,
+      nextVisibility: 'inline',
+      previousVisibility: 'none'
+    });
   }
 
   handleNextButtonClick(e) {
@@ -49,8 +56,8 @@ export default class PhotosModal extends React.Component {
     this.setState({
       currentPhotoIndex: this.state.currentPhotoIndex + 1,
       currentPhoto: this.state.photoArray[this.state.currentPhotoIndex + 1],
-      previousVisibility: 'show',
-      nextVisibility: this.state.currentPhotoIndex + 1 === this.state.photoCount -1 ? 'hidden' : 'show'
+      previousVisibility: 'inline',
+      nextVisibility: this.state.currentPhotoIndex + 1 === this.state.photoCount - 1 ? 'none' : 'inline'
     });
   }
 
@@ -59,18 +66,34 @@ export default class PhotosModal extends React.Component {
     this.setState({
       currentPhotoIndex: this.state.currentPhotoIndex - 1,
       currentPhoto: this.state.photoArray[this.state.currentPhotoIndex - 1],
-      previousVisibility:  this.state.currentPhotoIndex - 1 === 0 ? 'hidden' : 'show'
+      nextVisibility: 'inline',
+      previousVisibility: this.state.currentPhotoIndex - 1 === 0 ? 'none' : 'inline'
     });
   }
 
   render() {
     return (
       <div className='photos-modal'>
-        <button onClick={this.handleCloseButtonClick.bind(this)}>Close</button>
-        <button style = {{visibility: this.state.previousVisibility}} onClick={this.handlePreviousButtonClick.bind(this)}>Previous</button>
-        <button style = {{visibility: this.state.nextVisibility}} onClick={this.handleNextButtonClick.bind(this)}>Next</button>
-        <div>{ this.state.currentPhotoIndex + 1 }/{this.state.photoCount}</div>
-        <Photo imageURL = {this.state.currentPhoto.storage_url} />
+        <div className = 'photo-carousel-header'>
+          <div>
+            <button className = 'btn-carousel-close' onClick={this.handleCloseButtonClick.bind(this)}><i class="fas fa-times"></i> Close</button>
+          </div>
+          <div className = 'photo-counter'>
+            { this.state.currentPhotoIndex + 1 }&nbsp;/&nbsp;{this.state.photoCount}
+          </div>
+          <div>
+            <i class="far fa-heart"></i>
+          </div>
+        </div>
+        <div className = 'photo-carousel-body'>
+          <div>
+            <button className = 'btn-carousel' style = {{display: this.state.previousVisibility}} onClick={this.handlePreviousButtonClick.bind(this)}><i class="fas fa-angle-left"></i></button>
+          </div>
+          <Photo imageURL = {this.state.currentPhoto.storage_url} />
+          <div>
+            <button className = 'btn-carousel' style = {{display: this.state.nextVisibility}} onClick={this.handleNextButtonClick.bind(this)}><i class="fas fa-angle-right"></i></button>
+          </div>
+        </div>
       </div>
     );
   }
