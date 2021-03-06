@@ -11,6 +11,7 @@ const addPhoto = (req, res) => {
   const data = {
     room_id: req.params.id,
     name: req.body.name,
+    photo_id: req.body.photo_id,
     caption: req.body.caption,
     is_primary: req.body.is_primary,
     storage_url: req.body.storage_url
@@ -22,7 +23,7 @@ const addPhoto = (req, res) => {
 };
 
 const updatePhoto = (req, res) => {
-  const query = req.params.id;
+  const query = { photo_id: req.body.photo_id };
   const data = {
     name: req.body.name,
     caption: req.body.caption,
@@ -35,10 +36,9 @@ const updatePhoto = (req, res) => {
 };
 
 const deletePhoto = (req, res) => {
-  const room_id = req.params.id;
   const photo_id = req.body.photo_id;
 
-  models.destroy({ room_id: room_id }, { photo_id: photo_id })
+  models.destroy({ photo_id: photo_id })
     .then(data => res.status(204).end('Deletion success'))
     .catch(err => res.status(500).send(err))
 };
