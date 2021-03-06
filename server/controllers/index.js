@@ -9,27 +9,37 @@ const getPhotos = (req, res) => {
 
 const addPhoto = (req, res) => {
   const data = {
-    room_id: req.body.room_id,
+    room_id: req.params.id,
     name: req.body.name,
-    photo_id: req.body.photo_id,
     caption: req.body.caption,
     is_primary: req.body.is_primary,
     storage_url: req.body.storage_url
   };
 
   models.create(data)
-    .then(data => res.status(200).send(data))
+    .then(data => res.status(201).send(data))
     .catch(err => res.status(500).send(err))
 };
 
-const updatePhoto = (req, res) => {};
+const updatePhoto = (req, res) => {
+  const query = req.params.id;
+  const data = {
+    name: req.body.name,
+    caption: req.body.caption,
+    is_primary: req.body.is_primary
+  };
+
+  models.update(query, data)
+    .then(data => res.status(204).end('Update success'))
+    .catch(err => res.status(500).send(err))
+};
 
 const deletePhoto = (req, res) => {
-  const room_id = req.params.room_id;
-  const photo_id = req.params.photo_id;
+  const room_id = req.params.id;
+  const photo_id = req.body.photo_id;
 
   models.destroy({ room_id: room_id }, { photo_id: photo_id })
-    .then(data => res.status(200).end('Deletion success'))
+    .then(data => res.status(204).end('Deletion success'))
     .catch(err => res.status(500).send(err))
 };
 

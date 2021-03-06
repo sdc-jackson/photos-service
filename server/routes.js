@@ -5,8 +5,8 @@ router.get('/rooms/:id/getPhotosByRoomID', controller.getPhotos);
 
 router.post('/rooms/:id/addPhotosByRoomID', controller.addPhoto);
 
-router.put('/rooms/:id/updatePhotosByRoomID', controller.updatePhoto);
+router.put('/rooms/:id/updatePhotoByRoomID', controller.updatePhoto);
 
-router.delete('/rooms/:id/deletePhotosByRoomID', controller.deletePhoto);
+router.delete('/rooms/:id/deletePhotoByRoomID', controller.deletePhoto);
 
 module.exports = router;

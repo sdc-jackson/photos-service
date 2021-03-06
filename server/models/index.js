@@ -8,9 +8,24 @@ const read = (params) => {
     .catch(err => err)
 };
 
-const create = () => {};
+const create = (params) => {
+  return Photo
+    .create(params)
+    .then(data => data)
+    .catch(err => err)
+};
 
-const update = () => {};
+const update = (conditions, update) => {
+  const options = {
+    new: true
+  }
+
+  return Photo
+    .findOneAndUpdate(conditions, update, options)
+    .exec()
+    .then(data => data)
+    .catch(err => err)
+};
 
 const destroy = (params) => {
   return Photo
