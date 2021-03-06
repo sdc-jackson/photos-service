@@ -6,5 +6,10 @@
  */
 
 module.exports = {
+  {
+    "parserOptions": {
+        "ecmaVersion": 2017
+    }
+}
   extends: './node_modules/eslint-config-hackreactor/index.js'
 };
