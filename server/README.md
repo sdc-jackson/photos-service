@@ -78,7 +78,7 @@ _________________
 ### Parameters
 | Name        | Type        | In   | Description       |
 | ----------- | ----------- | ---- | ----------------- |
-| room_id     | String      | path | room_id parameter |
+| photo_id    | String      | body | *Required* |
 | name        | String      | body |      |
 | caption     | String      | body |      |
 | is_primary  | Boolean     | body |      |
