@@ -27,3 +27,4 @@ client/dist/
 #secrets
 .env
 
+globalConfig.json
