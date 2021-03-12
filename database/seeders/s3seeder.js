@@ -1,6 +1,7 @@
 const { uploadFile }  = require('./aws-s3.js');
 const { getRandomImage } = require('./fileHelper.js');
 
+//seeding script for generation and uploading photos to AWS s3 bucket
 const s3seeder = async (startingRecord, nRecords) => {
   let startTime = new Date().getTime();
 
@@ -16,4 +17,4 @@ const s3seeder = async (startingRecord, nRecords) => {
   console.log(`Execution time: ${executionTime} ms`);
 }
 
-// s3seeder(1, 1000);
+s3seeder(1, 1000);
