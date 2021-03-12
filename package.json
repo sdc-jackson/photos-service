@@ -10,8 +10,8 @@
   "scripts": {
     "build": "webpack -d --watch",
     "start": "nodemon server",
-    "seed": "node ./database/seed.js && exit 1",
-    "s3seeder": "node ./database/s3seeder.js",
+    "seed": "node ./database/seeders/postgresSeeder.js && exit 1",
+    "s3seeder": "node ./database/seeders/s3seeder.js",
     "lint": "eslint **/*.jsx ./database/*.js ./server/*.js",
     "test": "jest"
   },
