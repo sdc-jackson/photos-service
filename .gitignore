@@ -28,3 +28,4 @@ client/dist/
 .env
 
 globalConfig.json
+*.csv
