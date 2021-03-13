@@ -1,17 +1,16 @@
 // postgres seeding script
-const { photos } = require('../postgres/models/index.js');
+const { Rooms, Photos } = require('../postgres/models/index.js');
 const { csvGenerator } = require('./dataGenerator.js');
 
 const postgresSeeder = async (recordsToCreate) => {
   let startTime = new Date().getTime();
   try {
-    await photos.drop();
-    console.log('Starting new Postgres seeding session. Photos table dropped!')
-    await photos.sync({ force: true });
-    console.log('The table for the photos model was just (re)created!');
+    await Rooms.sync({ force: true });
+    await Photos.sync({ force: true });
+    console.log('The table for the Rooms and Photos model was just (re)created!');
 
     // batch number variable to create and save (change as desired for performance testing)
-    let recordsPerBatch = 100000;
+    let recordsPerBatch = 10000;
 
     // load csvGenerator with params; await results
     await csvGenerator(recordsPerBatch, recordsToCreate);
