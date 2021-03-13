@@ -4,8 +4,8 @@ const { postgresDB: { db_name, user, pass } } = config;
 
 const pgConfig = {
   "define": {
-    "createdAt": "createdat",
-    "updatedAt": "updatedat",
+    "createdAt": "created_at",
+    "updatedAt": "updated_at",
   },
   logging: false,
   dialect: 'postgres',

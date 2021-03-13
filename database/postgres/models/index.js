@@ -1,18 +1,26 @@
 const { Sequelize, DataTypes } = require('sequelize');
 const db = require('../index.js');
 
-const photos = db.define('photos', {
+const Rooms = db.define('rooms', {
   id: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.UUID,
     primaryKey: true,
-    autoIncrement: true
+    allowNull: false
+  },
+  name: DataTypes.STRING
+});
+
+const Photos = db.define('photos', {
+  id: {
+    type: Sequelize.UUID,
+    primaryKey: true,
+    allowNull: false
   },
   room_id: {
-    type: DataTypes.STRING,
+    type: DataTypes.UUID,
     allowNull: false
   },
   name: DataTypes.STRING,
-  photo_id: DataTypes.STRING,
   caption: DataTypes.STRING,
   is_primary: DataTypes.BOOLEAN,
   storage_url: {
@@ -21,4 +29,13 @@ const photos = db.define('photos', {
   }
 });
 
-module.exports.photos = photos;
+Rooms.hasMany(Photos, {
+  foreignKey: 'room_id',
+});
+
+Photos.belongsTo(Rooms, {
+  onDelete: 'cascade'
+});
+
+module.exports.Rooms = Rooms;
+module.exports.Photos = Photos;
