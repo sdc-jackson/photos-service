@@ -7,6 +7,7 @@ const Rooms = db.define('rooms', {
     primaryKey: true,
     allowNull: false
   },
+  room_number: Sequelize.INTEGER,
   name: DataTypes.STRING
 });
 

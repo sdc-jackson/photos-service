@@ -14,14 +14,15 @@ const randomNumberGenerator = (min, max) => {
 }
 
 // helper function to generate a CSV row of fake data for DB insertion
-const roomsRowGenerator = async (roomID) => {
+const roomsRowGenerator = async (roomID, roomNumber) => {
   let row = '';
   let id = roomID;
+  let room_number = roomNumber;
   let name = await faker.commerce.productAdjective();
   let created_at = await new Date().toISOString();
   let updated_at = await new Date().toISOString();
 
-  return row += id + ',' + name + ',' + created_at + ',' + updated_at + '\n';
+  return row += id + ',' + room_number + ',' + name + ',' + created_at + ',' + updated_at + '\n';
 }
 
 const photosRowGenerator = async (roomID, photoNum, primaryPhoto) => {
@@ -50,7 +51,7 @@ const csvGenerator = async (recordsPerBatch, recordsToCreate) => {
   await client.connect()
   let photoNum = 1;
   let batchCounter = 0;
-  let roomID = 1;
+  let roomNumber = 1;
 
   try {
     // while loop for 10M records
@@ -66,7 +67,7 @@ const csvGenerator = async (recordsPerBatch, recordsToCreate) => {
         let primaryPhoto = true;
 
         // generate row data for rooms
-        roomsCSV += await roomsRowGenerator(roomID);
+        roomsCSV += await roomsRowGenerator(roomID, roomNumber);
 
         while (photosPerRoomID > 0) {
           // reset counter if photos is > 1000 (max amount 1000 in AWS S3 bucket);
@@ -83,7 +84,7 @@ const csvGenerator = async (recordsPerBatch, recordsToCreate) => {
           primaryPhoto = false;
         }
 
-        roomID++;
+        roomNumber++;
       }
 
       batchCounter += recordsPerBatch;
@@ -95,7 +96,7 @@ const csvGenerator = async (recordsPerBatch, recordsToCreate) => {
 
       console.log('writing data batch to db..')
       await client
-        .query("COPY Rooms(id, name, created_at, updated_at) from '" + __dirname + '/' + ROOMS_CSV_FILE + "' WITH (FORMAT csv, HEADER true)")
+        .query("COPY Rooms(id, room_number, name, created_at, updated_at) from '" + __dirname + '/' + ROOMS_CSV_FILE + "' WITH (FORMAT csv, HEADER true)")
         .then(result => console.log('seeding rooms table...'))
         .catch(e => console.log(e.stack))
 
