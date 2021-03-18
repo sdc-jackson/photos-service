@@ -1,6 +1,6 @@
 // postgres seeding script
 const { Rooms, Photos } = require('../postgres/models/index.js');
-const { csvGenerator } = require('./dataGenerator.js');
+const { csvGenerator } = require('./csvDataGenerator.js');
 
 const postgresSeeder = async (recordsToCreate) => {
   const startTime = new Date().getTime();

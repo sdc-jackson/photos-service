@@ -117,3 +117,4 @@ const csvGenerator = async (recordsPerBatch, recordsToCreate) => {
 }
 
 module.exports.csvGenerator = csvGenerator;
+module.exports.randomNumberGenerator = randomNumberGenerator;
