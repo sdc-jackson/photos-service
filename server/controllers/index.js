@@ -2,7 +2,7 @@ const models = require('../models');
 
 const getPhotos = (req, res) => {
   const room_id = req.params.id;
-  models.read({ room_id: room_id })
+  models.read(room_id)
     .then(photos => res.status(200).send(photos))
     .catch(err => res.status(500).send(err))
 };

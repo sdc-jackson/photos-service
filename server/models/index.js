@@ -1,10 +1,8 @@
-const { Photo } = require('../../database/schema.js');
+const { Rooms, Photos } = require('../../database/postgres/models/index.js');
 
-const read = (params) => {
-  return Photo
-    .find(params)
-    .exec()
-    .then(photos => photos)
+const read = async (params) => {
+  return Rooms.findAll({ where: {room_number: params}, include: [Photos]})
+    .then(res => res)
     .catch(err => err)
 };
 
