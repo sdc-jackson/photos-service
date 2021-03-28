@@ -13,14 +13,12 @@ const create = (params) => {
     .catch(err => err)
 };
 
-const update = (conditions, update) => {
-  const options = {
-    new: true
-  }
-
-  return Photo
-    .findOneAndUpdate(conditions, update, options)
-    .exec()
+const update = (values, options) => {
+  return Photos
+    .update(
+      options,
+      {where: values}
+    )
     .then(data => data)
     .catch(err => err)
 };

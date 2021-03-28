@@ -23,14 +23,15 @@ const addPhoto = (req, res) => {
 };
 
 const updatePhoto = (req, res) => {
-  const query = { photo_id: req.body.photo_id };
-  const data = {
+  const values = { id: req.body.id };
+  const options = {
     name: req.body.name,
     caption: req.body.caption,
-    is_primary: req.body.is_primary
+    is_primary: req.body.is_primary,
+    storage_url: req.body.storage_url
   };
 
-  models.update(query, data)
+  models.update(values, options)
     .then(data => res.status(204).end('Update success'))
     .catch(err => res.status(500).send(err))
 };
