@@ -1,4 +1,5 @@
 const models = require('../models');
+const { v4: uuidv4 } = require('uuid');
 
 const getPhotos = (req, res) => {
   const room_id = req.params.id;
@@ -9,9 +10,9 @@ const getPhotos = (req, res) => {
 
 const addPhoto = (req, res) => {
   const data = {
-    room_id: req.params.id,
+    id: uuidv4(),
+    room_id: req.body.room_id,
     name: req.body.name,
-    photo_id: req.body.photo_id,
     caption: req.body.caption,
     is_primary: req.body.is_primary,
     storage_url: req.body.storage_url

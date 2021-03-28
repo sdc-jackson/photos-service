@@ -7,7 +7,7 @@ const read = async (params) => {
 };
 
 const create = (params) => {
-  return Photo
+  return Photos
     .create(params)
     .then(data => data)
     .catch(err => err)
