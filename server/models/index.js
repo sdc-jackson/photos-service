@@ -26,9 +26,11 @@ const update = (conditions, update) => {
 };
 
 const destroy = (params) => {
-  return Photo
-    .deleteOne(params)
-    .exec()
+  return Photos.destroy({
+    where: {
+      id: params
+    }
+  })
     .then(data => data)
     .catch(err => err)
 };

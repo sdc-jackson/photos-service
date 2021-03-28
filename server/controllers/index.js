@@ -37,8 +37,9 @@ const updatePhoto = (req, res) => {
 
 const deletePhoto = (req, res) => {
   const photo_id = req.body.photo_id;
+  console.log(`Deleting record: ${photo_id}`)
 
-  models.destroy({ photo_id: photo_id })
+  models.destroy(photo_id)
     .then(data => res.status(204).end('Deletion success'))
     .catch(err => res.status(500).send(err))
 };
