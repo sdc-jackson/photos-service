@@ -31,7 +31,8 @@ export default class PhotosModal extends React.Component {
   fetchPhotos() {
     fetch(`/rooms/${this.state.roomId}/getPhotosByRoomId`)
       .then((response) => response.json())
-      .then((photos) => {
+      .then((data) => {
+        let photos = data[0].photos;
         this.setState({
           photoArray: photos,
           photoCount: photos.length,

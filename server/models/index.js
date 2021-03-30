@@ -1,36 +1,34 @@
-const { Photo } = require('../../database/schema.js');
+const { Rooms, Photos } = require('../../database/postgres/models/index.js');
 
 const read = (params) => {
-  return Photo
-    .find(params)
-    .exec()
-    .then(photos => photos)
+  return Rooms.findAll({ where: {room_number: params}, include: [Photos]})
+    .then(res => res)
     .catch(err => err)
 };
 
 const create = (params) => {
-  return Photo
+  return Photos
     .create(params)
     .then(data => data)
     .catch(err => err)
 };
 
-const update = (conditions, update) => {
-  const options = {
-    new: true
-  }
-
-  return Photo
-    .findOneAndUpdate(conditions, update, options)
-    .exec()
+const update = (values, options) => {
+  return Photos
+    .update(
+      options,
+      {where: values}
+    )
     .then(data => data)
     .catch(err => err)
 };
 
 const destroy = (params) => {
-  return Photo
-    .deleteOne(params)
-    .exec()
+  return Photos.destroy({
+    where: {
+      id: params
+    }
+  })
     .then(data => data)
     .catch(err => err)
 };

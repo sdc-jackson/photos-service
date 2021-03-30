@@ -28,7 +28,8 @@ export default class PhotoGrid extends React.Component {
   fetchPhotos() {
     fetch(`/rooms/${this.state.roomId}/getPhotosByRoomId`)
       .then((response) => response.json())
-      .then((photos) => {
+      .then((data) => {
+        let photos = data[0].photos;
         let primaryPhoto = photos.find(photo => photo.is_primary);
         let secondaryPhotos = photos.filter((photo) => photo.is_primary === false);
         this.setState({
