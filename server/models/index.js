@@ -1,6 +1,6 @@
 const { Rooms, Photos } = require('../../database/postgres/models/index.js');
 
-const read = async (params) => {
+const read = (params) => {
   return Rooms.findAll({ where: {room_number: params}, include: [Photos]})
     .then(res => res)
     .catch(err => err)
