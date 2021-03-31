@@ -29,3 +29,5 @@ client/dist/
 
 globalConfig.json
 *.csv
+*.pem
+*.sh
