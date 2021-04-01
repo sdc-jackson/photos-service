@@ -5,7 +5,13 @@ const { aws: { AWS_URL } } = config;
 const fs = require('fs').promises;
 const { postgresDB: { db_name, user, pass } } = config;
 const { Client } = require('pg');
-const client = new Client(db_name, user, pass);
+const client = new Client({
+  host: 'localhost',
+  port: 5432,
+  database: db_name,
+  user: user,
+  password: pass
+});
 const ROOMS_CSV_FILE = 'rooms-seed-data.csv';
 const PHOTOS_CSV_FILE = 'photos-seed-data.csv';
 
