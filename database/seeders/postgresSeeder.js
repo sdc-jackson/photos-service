@@ -26,4 +26,4 @@ const postgresSeeder = async (recordsToCreate) => {
 }
 
 // seed 10M records
-postgresSeeder(1000000);
+postgresSeeder(10000000);
