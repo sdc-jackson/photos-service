@@ -1,0 +1,19 @@
+config:
+  target: "http://localhost:5005"
+  phases:
+    - duration: 30
+      arrivalRate: 1
+    - duration: 15
+      arrivalRate: 10
+    - duration: 10
+      arrivalRate: 100
+    - duration: 5
+      arrivalRate: 1000
+  processor: "./stress-test-helper.js"
+scenarios:
+  - name: "Load photos service at random id"
+    flow:
+      - function: "getRandomId"
+      - get:
+          url: "/rooms/{{ id }}"
+      - log: "Sent a GET request to /rooms/{{ id }}"

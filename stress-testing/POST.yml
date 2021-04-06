@@ -1,0 +1,27 @@
+config:
+  target: "http://localhost:5005"
+  phases:
+    - duration: 30
+      arrivalRate: 1
+    - duration: 15
+      arrivalRate: 10
+    - duration: 10
+      arrivalRate: 100
+    - duration: 5
+      arrivalRate: 1000
+  processor: "./stress-test-helper.js"
+scenarios:
+  - name: "Post random photo data to photos table"
+    flow:
+      - function: "postRandomData"
+      - post:
+          url: "/rooms/{{ roomNumber }}/addPhotosByRoomID"
+          json:
+            photo_id: "{{ photoId }}"
+            room_number: "{{ roomNumber }}"
+            name: "{{ name }}"
+            caption: "{{ caption }}"
+            is_primary: "{{ isPrimary }}"
+            storage_url: "{{ storageUrl }}"
+      - log: "Sent a POST request to /rooms/{{ roomNumber }}/addPhotosByRoomID"
+

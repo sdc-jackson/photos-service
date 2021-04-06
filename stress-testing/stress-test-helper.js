@@ -1,0 +1,39 @@
+// artillery helper functions for stress testing
+const { v4: uuidv4 } = require('uuid');
+const faker = require('faker');
+const { config } = require('../config.js');
+const { aws: { AWS_URL } } = config;
+
+const randomNumberGenerator = (min, max) => {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+// get random id between 1 - 10M
+const getRandomId = (userContext, events, done) => {
+  const id = randomNumberGenerator(1, 10000000);
+  userContext.vars.id = id;
+  return done();
+};
+
+// post random photo data to database
+const postRandomData = (userContext, events, done) => {
+  const photoNum = randomNumberGenerator(1, 1000);
+
+  const photoId = uuidv4();
+  const roomNumber = randomNumberGenerator(1, 10000000);
+  const name = faker.commerce.productAdjective();
+  const caption = faker.commerce.productName();
+  const isPrimary = false;
+  const storageUrl = `https://${AWS_URL}/${photoNum}.jpg`;
+
+  userContext.vars.roomNumber = roomNumber;
+  userContext.vars.photoId = photoId;
+  userContext.vars.name = name;
+  userContext.vars.caption = caption;
+  userContext.vars.isPrimary = isPrimary;
+  userContext.vars.storageUrl = storageUrl;
+
+  return done();
+};
+
+module.exports = { getRandomId, postRandomData };
