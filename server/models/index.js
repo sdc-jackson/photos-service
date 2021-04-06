@@ -7,9 +7,27 @@ const read = (params) => {
 };
 
 const create = (params) => {
-  return Photos
-    .create(params)
-    .then(data => data)
+  return Rooms
+    // find foreign key room_id based on room_number
+    .findOne({
+      where: {room_number: params.room_number},
+      attributes: ['room_id']
+    })
+    .then((roomData) => {
+
+      const dataToInsert = {
+        photo_id: params.photo_id,
+        room_id: roomData.room_id, // insert data with foreign key
+        name: params.name,
+        caption: params.caption,
+        is_primary: params.is_primary,
+        storage_url: params.storage_url
+      }
+
+      return Photos
+        .create(dataToInsert)
+        .then(data => data)
+    })
     .catch(err => err)
 };
 
