@@ -5,6 +5,7 @@ const app = express();
 const PORT = 5005;
 const router = require('./routes.js');
 const postgresDB = require('../database/postgres/index.js');
+require('newrelic');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
