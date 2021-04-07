@@ -11,7 +11,7 @@ const postgresSeeder = async (recordsToCreate) => {
     console.log('The table for the Rooms and Photos model was just (re)created!');
 
     // batch number variable to create and save (change as desired for performance testing)
-    const recordsPerBatch = 100000;
+    const recordsPerBatch = 2000;
 
     // load csvGenerator with params; await results
     await csvGenerator(recordsPerBatch, recordsToCreate);

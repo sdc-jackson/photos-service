@@ -2,7 +2,7 @@ const { Sequelize, DataTypes } = require('sequelize');
 const db = require('../index.js');
 
 const Rooms = db.define('rooms', {
-  id: {
+  room_id: {
     type: Sequelize.UUID,
     primaryKey: true,
     allowNull: false
@@ -12,7 +12,7 @@ const Rooms = db.define('rooms', {
 });
 
 const Photos = db.define('photos', {
-  id: {
+  photo_id: {
     type: Sequelize.UUID,
     primaryKey: true,
     allowNull: false
@@ -30,12 +30,16 @@ const Photos = db.define('photos', {
   }
 });
 
+Rooms.removeAttribute('id');
+Photos.removeAttribute('id');
+
 Rooms.hasMany(Photos, {
   foreignKey: 'room_id',
 });
 
 Photos.belongsTo(Rooms, {
-  onDelete: 'cascade'
+  onDelete: 'cascade',
+  foreignKey: 'room_id'
 });
 
 module.exports.Rooms = Rooms;

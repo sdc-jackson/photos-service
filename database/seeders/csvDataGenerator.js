@@ -5,7 +5,13 @@ const { aws: { AWS_URL } } = config;
 const fs = require('fs').promises;
 const { postgresDB: { db_name, user, pass } } = config;
 const { Client } = require('pg');
-const client = new Client(db_name, user, pass);
+const client = new Client({
+  host: 'localhost',
+  port: 5432,
+  database: db_name,
+  user: user,
+  password: pass
+});
 const ROOMS_CSV_FILE = 'rooms-seed-data.csv';
 const PHOTOS_CSV_FILE = 'photos-seed-data.csv';
 
@@ -40,8 +46,8 @@ const photosRowGenerator = async (roomID, photoNum, primaryPhoto) => {
 }
 
 // define CSV headers
-const roomsTableHeaders = 'id, name, created_at, updated_at\n';
-const photosTableHeaders = 'id, room_id, name, caption, is_primary, storage_url, created_at, updated_at\n';
+const roomsTableHeaders = 'room_id, name, created_at, updated_at\n';
+const photosTableHeaders = 'photo_id, room_id, name, caption, is_primary, storage_url, created_at, updated_at\n';
 
 // set headers
 let roomsCSV = roomsTableHeaders;
@@ -96,12 +102,12 @@ const csvGenerator = async (recordsPerBatch, recordsToCreate) => {
 
       console.log('writing data batch to db..')
       await client
-        .query("COPY Rooms(id, room_number, name, created_at, updated_at) from '" + __dirname + '/' + ROOMS_CSV_FILE + "' WITH (FORMAT csv, HEADER true)")
+        .query("COPY Rooms(room_id, room_number, name, created_at, updated_at) from '" + __dirname + '/' + ROOMS_CSV_FILE + "' WITH (FORMAT csv, HEADER true)")
         .then(result => console.log('seeding rooms table...'))
         .catch(e => console.log(e.stack))
 
       await client
-        .query("COPY Photos(id, room_id, name, caption, is_primary, storage_url, created_at, updated_at) from '" + __dirname + '/' + PHOTOS_CSV_FILE + "' WITH (FORMAT csv, HEADER true)")
+        .query("COPY Photos(photo_id, room_id, name, caption, is_primary, storage_url, created_at, updated_at) from '" + __dirname + '/' + PHOTOS_CSV_FILE + "' WITH (FORMAT csv, HEADER true)")
         .then(result => console.log('seeding photos table...'))
         .catch(e => console.log(e.stack))
 
