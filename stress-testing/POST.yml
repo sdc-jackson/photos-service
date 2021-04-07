@@ -1,17 +1,17 @@
 config:
   target: "http://localhost:5005"
   phases:
-    - duration: 30
-      arrivalRate: 1
-    - duration: 15
-      arrivalRate: 10
-    - duration: 10
-      arrivalRate: 100
     - duration: 5
+      arrivalRate: 1
+    - duration: 10
+      arrivalRate: 10
+    - duration: 15
+      arrivalRate: 100
+    - duration: 60
       arrivalRate: 1000
   processor: "./stress-test-helper.js"
 scenarios:
-  - name: "Post random photo data to photos table"
+  - name: "Post random photo data to photos table within last 10% of dataset"
     flow:
       - function: "postRandomData"
       - post:
@@ -23,5 +23,3 @@ scenarios:
             caption: "{{ caption }}"
             is_primary: "{{ isPrimary }}"
             storage_url: "{{ storageUrl }}"
-      - log: "Sent a POST request to /rooms/{{ roomNumber }}/addPhotosByRoomID"
-
