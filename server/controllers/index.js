@@ -9,16 +9,7 @@ const getPhotos = (req, res) => {
 };
 
 const addPhoto = (req, res) => {
-  const data = {
-    id: uuidv4(),
-    room_id: req.body.room_id,
-    name: req.body.name,
-    caption: req.body.caption,
-    is_primary: req.body.is_primary,
-    storage_url: req.body.storage_url
-  };
-
-  models.create(data)
+  models.create(req.body)
     .then(data => res.status(201).send(data))
     .catch(err => res.status(500).send(err))
 };
