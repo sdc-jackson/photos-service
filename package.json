@@ -9,6 +9,7 @@
   },
   "scripts": {
     "build": "webpack -d --watch",
+    "prod-build": "webpack --mode=production",
     "start": "nodemon server",
     "pg-seeder": "node ./database/seeders/postgresSeeder.js",
     "couchdb-seeder": "node ./database/seeders/couchdbSeeder.js",
