@@ -23,4 +23,4 @@ This will create 5 photos for each room => 500 entries in DB and S3 bucket => ~ 
 npm start<br>
 
 # photos-service API
-[photos-service API] (server/README.md)
+[photos-service API](server/README.md)
