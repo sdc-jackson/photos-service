@@ -12,9 +12,9 @@ const config = {
     name: 'airbnb'
   },
   postgresDB: {
-    host: 'localhost',
-    port: 5432,
-    db_name: 'sdc_photos',
+    host: process.env.POSTGRES_HOST,
+    port: process.env.POSTGRES_PORT,
+    db_name: process.env.POSTGRES_DB,
     user: process.env.POSTGRES_USER,
     pass: process.env.POSTGRES_PW
   },
