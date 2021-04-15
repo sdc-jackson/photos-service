@@ -1,5 +1,4 @@
 const models = require('../models');
-const { v4: uuidv4 } = require('uuid');
 
 const getPhotos = (req, res) => {
   const room_id = req.params.id;
@@ -9,7 +8,8 @@ const getPhotos = (req, res) => {
 };
 
 const addPhoto = (req, res) => {
-  models.create(req.body)
+  const roomNumber = req.params.id;
+  models.create(roomNumber, req.body)
     .then(data => res.status(201).send(data))
     .catch(err => res.status(500).send(err))
 };

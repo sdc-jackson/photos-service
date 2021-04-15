@@ -1,4 +1,5 @@
 const { Rooms, Photos } = require('../../database/postgres/models/index.js');
+const { v4: uuidv4 } = require('uuid');
 
 const read = (params) => {
   return Rooms.findAll({ where: {room_number: params}, include: [Photos]})
@@ -6,17 +7,17 @@ const read = (params) => {
     .catch(err => err)
 };
 
-const create = (params) => {
+const create = (roomNumber, params) => {
   return Rooms
     // find foreign key room_id based on room_number
     .findOne({
-      where: {room_number: params.room_number},
+      where: {room_number: roomNumber},
       attributes: ['room_id']
     })
     .then((roomData) => {
 
       const dataToInsert = {
-        photo_id: params.photo_id,
+        photo_id: uuidv4(),
         room_id: roomData.room_id, // insert data with foreign key
         name: params.name,
         caption: params.caption,
