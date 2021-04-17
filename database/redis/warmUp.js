@@ -1,15 +1,34 @@
-const models = require('../../server/models');
+const db = require('../postgres');
+const { redisClient } = require('../redis');
+const { Rooms, Photos } = require('../postgres/models');
 
-const warmUp = async () => {
-  try {
-    console.log('running redis cache warm up');
-    for (let i = 9000000; i <= 9333333; i++) {
-      console.log(i);
-      await models.read(i);
+const warmUp = async (params) => {
+  const startTime = new Date().getTime();
+  console.log('running redis cache warm up');
+  await db.authenticate();
+
+  while (params <= 9150000) {
+    console.log(params)
+
+    try {
+      await Rooms.findAll({ where: {room_number: params}, include: [Photos] })
+      .then((res) => JSON.stringify(res))
+      .then(async (data) => {
+        await redisClient.setex(params, 3600, data);
+        return data
+      })
+      .catch(err => err)
+
+    } catch (e) {
+      console.log(e)
     }
-  } catch (err) {
-    console.log(err);
+
+    params++;
   }
+
+  const endTime = new Date().getTime();
+  const executionTime = (endTime - startTime);
+  console.log(`Execution time: ${executionTime} ms`);
 }
 
-warmUp();
+warmUp(9000000);
