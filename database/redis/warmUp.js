@@ -14,7 +14,7 @@ const warmUp = async (params) => {
       await Rooms.findAll({ where: {room_number: params}, include: [Photos] })
       .then((res) => JSON.stringify(res))
       .then(async (data) => {
-        await redisClient.setex(params, 3600, data);
+        await redisClient.set(params, data);
         return data
       })
       .catch(err => err)

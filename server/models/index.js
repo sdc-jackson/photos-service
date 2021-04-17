@@ -6,7 +6,7 @@ const read = (params) => {
   return Rooms.findAll({ where: {room_number: params}, include: [Photos]})
     .then((res) => JSON.stringify(res))
     .then((data) => {
-      redisClient.setex(params, 3600, data);
+      redisClient.set(params, data);
       return data
     })
     .catch(err => err)
