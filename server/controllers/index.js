@@ -1,6 +1,7 @@
 const models = require('../models');
 
 const getPhotos = (req, res) => {
+  console.log('fetching data...')
   const room_id = req.params.id;
   models.read(room_id)
     .then(photos => res.status(200).send(photos))

@@ -1,9 +1,14 @@
 const { Rooms, Photos } = require('../../database/postgres/models/index.js');
+const { redisClient } = require('../../database/redis');
 const { v4: uuidv4 } = require('uuid');
 
 const read = (params) => {
   return Rooms.findAll({ where: {room_number: params}, include: [Photos]})
-    .then(res => res)
+    .then((res) => JSON.stringify(res))
+    .then((data) => {
+      redisClient.setex(params, 3600, data);
+      return data
+    })
     .catch(err => err)
 };
 
