@@ -1,5 +1,68 @@
 import React from 'react';
 import Photo from './Photo.jsx';
+import styled from 'styled-components';
+
+const PhotosModalStyles = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  opacity: 1;
+  background-color: white;
+`;
+
+const PhotosCarouselHeader = styled.div`
+  margin: 20px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+const PhotosCarouselBody = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 20px;
+`;
+
+const CarouselButton = styled.button`
+  border-radius: 50%;
+  border-style: solid;
+  border-width: 0.5px;
+  padding: 10px;
+`;
+
+const CloseButton = styled.button`
+  padding: 4px 8px;
+  font-size: 8px;
+  font-weight: 400;
+  border-radius: 4px;
+  border-style: none;
+  border-width: 0;
+  background-color: rgb(224, 225, 226);
+`;
+
+const CloseIcon = styled.i`
+  opacity: .64;
+  width: 10px;
+  height: 9px;
+  background-position: -297px -5px;
+  background-image: url('https://fec-icons.s3-us-west-1.amazonaws.com/icons.png');
+  display: inline-block;
+  vertical-align: top;
+  background-size: 400px 900px;
+  background-repeat: no-repeat;
+`;
+
+const PhotoCounter = styled.div`
+  padding: 4px 8px;
+  font-size: 12px;
+  font-weight: 500;
+`;
 
 export default class PhotosModal extends React.Component {
   constructor(props) {
@@ -73,28 +136,27 @@ export default class PhotosModal extends React.Component {
 
   render() {
     return (
-      <div className='photos-modal'>
-        <div className = 'photo-carousel-header'>
+      <PhotosModalStyles>
+        <PhotosCarouselHeader>
           <div>
-            <button className = 'btn-carousel-close' onClick={this.handleCloseButtonClick.bind(this)}><i class="fas fa-times"></i> Close</button>
+            <CloseButton onClick={this.handleCloseButtonClick.bind(this)}><CloseIcon></CloseIcon> Close</CloseButton>
           </div>
-          <div className = 'photo-counter'>
+          <PhotoCounter>
             { this.state.currentPhotoIndex + 1 }&nbsp;/&nbsp;{this.state.photoCount}
-          </div>
+          </PhotoCounter>
           <div>
-            <i class="far fa-heart"></i>
           </div>
-        </div>
-        <div className = 'photo-carousel-body'>
+        </PhotosCarouselHeader>
+        <PhotosCarouselBody>
           <div>
-            <button className = 'btn-carousel' style = {{display: this.state.previousVisibility}} onClick={this.handlePreviousButtonClick.bind(this)}><i class="fas fa-angle-left"></i></button>
+            <CarouselButton style = {{display: this.state.previousVisibility}} onClick={this.handlePreviousButtonClick.bind(this)}></CarouselButton>
           </div>
           <Photo imageURL = {this.state.currentPhoto.storage_url} />
           <div>
-            <button className = 'btn-carousel' style = {{display: this.state.nextVisibility}} onClick={this.handleNextButtonClick.bind(this)}><i class="fas fa-angle-right"></i></button>
+            <CarouselButton style = {{display: this.state.nextVisibility}} onClick={this.handleNextButtonClick.bind(this)}></CarouselButton>
           </div>
-        </div>
-      </div>
+        </PhotosCarouselBody>
+      </PhotosModalStyles>
     );
   }
 }

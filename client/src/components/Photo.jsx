@@ -1,4 +1,12 @@
 import React from 'react';
+import styled from 'styled-components';
+
+const PhotoCarouselImage = styled.img`
+  width: 100%;
+  height: auto;
+  max-height: 500px;
+  margin-bottom: 50px;
+`;
 
 export default class Photo extends React.Component {
   constructor(props) {
@@ -8,7 +16,7 @@ export default class Photo extends React.Component {
   render() {
     return (
       <div>
-        <img className = 'photo-carousel-body-img' src = {this.props.imageURL} />
+        <PhotoCarouselImage src = {this.props.imageURL}></PhotoCarouselImage>
       </div>
     );
   }

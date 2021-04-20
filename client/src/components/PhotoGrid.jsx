@@ -1,4 +1,68 @@
 import React from 'react';
+import styled from 'styled-components';
+
+const PhotoGridStyle = styled.div`
+  display: flex;
+`;
+
+const PhotoGridRow = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  height: auto;
+`;
+
+const PhotoGridColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+const PrimaryImage = styled.img`
+  width: 100%;
+  height: auto;
+  margin: 1px;
+  border-radius: 6px 0 0 6px;
+  min-width: 150px;
+  max-width: 300px;
+`;
+
+const SecondaryImage = styled.img`
+  width: 100%;
+  height: auto;
+  margin: 1px;
+  min-width: 75px;
+  max-width: 150px;
+`;
+
+const SecondaryTopImage = styled(SecondaryImage)`
+  border-radius: 0 6px 0 0;
+`;
+
+const SecondaryBottomImage = styled(SecondaryImage)`
+  border-radius: 0 0 6px 0;
+`;
+
+const ButtonContainer = styled.div`
+  position: relative;
+`;
+
+const Button = styled.button`
+  position: absolute;
+  top: 75%;
+  left: 45%;
+  padding: 5px;
+  border-radius: 3px;
+  border-style: solid;
+  border-width: 0.5px;
+  font-size: 7px;
+  width: 100%;
+  height: auto;
+  max-width: 70px;
+  cursor: pointer;
+`;
 
 export default class PhotoGrid extends React.Component {
   constructor(props) {
@@ -49,22 +113,22 @@ export default class PhotoGrid extends React.Component {
 
   render() {
     return (
-      <div className = 'photo-grid'>
-        <div className = 'flex-container-row'>
-          <img className='responsive-img primary-img' src = {this.state.primaryPhoto} alt = 'Photo Unavailable'/>
-          <div className = 'flex-container-column'>
-            <img className='responsive-img secondary-img' src = {this.state.photoTopLeft} alt = 'Photo Unavailable'/>
-            <img className='responsive-img secondary-img' src = {this.state.photoBottomLeft} alt = 'Photo Unavailable'/>
-          </div>
-          <div className = 'flex-container-column'>
-            <img className='responsive-img secondary-img secondary-img-top' src = {this.state.photoTopRight} alt = 'Photo Unavailable'/>
-            <div className = 'photo-btn-container'>
-              <img className = 'responsive-img secondary-img secondary-img-bottom' src = {this.state.photoBottomRight} alt = 'Photo Unavailable'/>
-              <button className = 'photo-btn' onClick={this.handleShowAllPhotosButtonClick.bind(this)}>Show All Photos</button>
-            </div>
-          </div>
-        </div>
-      </div>
+      <PhotoGridStyle>
+        <PhotoGridRow>
+          <PrimaryImage src = {this.state.primaryPhoto} alt = 'Photo Unavailable'/>
+          <PhotoGridColumn>
+            <SecondaryImage src = {this.state.photoTopLeft} alt = 'Photo Unavailable'/>
+            <SecondaryImage src = {this.state.photoBottomLeft} alt = 'Photo Unavailable'/>
+          </PhotoGridColumn>
+          <PhotoGridColumn>
+            <SecondaryTopImage src = {this.state.photoTopRight} alt = 'Photo Unavailable'/>
+            <ButtonContainer>
+              <SecondaryBottomImage src = {this.state.photoBottomRight} alt = 'Photo Unavailable'/>
+              <Button onClick={this.handleShowAllPhotosButtonClick.bind(this)}>Show All Photos</Button>
+            </ButtonContainer>
+          </PhotoGridColumn>
+        </PhotoGridRow>
+      </PhotoGridStyle>
     );
   }
 }
