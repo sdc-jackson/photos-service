@@ -1,6 +1,5 @@
 import React from 'react';
 import Photo from './Photo.jsx';
-import FontAwesome from '@fortawesome/fontawesome-free/js/all.js';
 
 export default class PhotosModal extends React.Component {
   constructor(props) {
