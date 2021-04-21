@@ -115,15 +115,15 @@ export default class PhotoGrid extends React.Component {
     return (
       <PhotoGridStyle>
         <PhotoGridRow>
-          <PrimaryImage src = {this.state.primaryPhoto} alt = 'Photo Unavailable'/>
+          <PrimaryImage src = {this.state.primaryPhoto} />
           <PhotoGridColumn>
-            <SecondaryImage src = {this.state.photoTopLeft} alt = 'Photo Unavailable'/>
-            <SecondaryImage src = {this.state.photoBottomLeft} alt = 'Photo Unavailable'/>
+            <SecondaryImage src = {this.state.photoTopLeft} />
+            <SecondaryImage src = {this.state.photoBottomLeft} />
           </PhotoGridColumn>
           <PhotoGridColumn>
-            <SecondaryTopImage src = {this.state.photoTopRight} alt = 'Photo Unavailable'/>
+            <SecondaryTopImage src = {this.state.photoTopRight} />
             <ButtonContainer>
-              <SecondaryBottomImage src = {this.state.photoBottomRight} alt = 'Photo Unavailable'/>
+              <SecondaryBottomImage src = {this.state.photoBottomRight} />
               <Button onClick={this.handleShowAllPhotosButtonClick.bind(this)}>Show All Photos</Button>
             </ButtonContainer>
           </PhotoGridColumn>

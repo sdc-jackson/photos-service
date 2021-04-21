@@ -7,7 +7,7 @@
    </head>
    <body>
      <div id="main">${body}</div>
-     <script type='text/javascript' src=${script}></script>
+     <script type='text/javascript' src='${script}'></script>
    </body>
  </html>
 `;

@@ -1,4 +1,4 @@
-const { Rooms, Photos } = require('../../database/postgres/models/index.js');
+import { Rooms, Photos } from '../../database/postgres/models/index.js';
 const { redisClient } = require('../../database/redis');
 const { v4: uuidv4 } = require('uuid');
 
@@ -57,4 +57,4 @@ const destroy = (params) => {
     .catch(err => err)
 };
 
-module.exports = {read, create, update, destroy};
+export { read, create, update, destroy }

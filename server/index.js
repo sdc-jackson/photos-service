@@ -5,10 +5,12 @@ import Html from '../client/src/components/Html.js';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { ServerStyleSheet } from 'styled-components';
+import cors from 'cors';
+const path = require('path');
 
 const app = express();
+app.use(cors());
 const PORT = 5005;
-app.use('/', express.static(__dirname + '/../public'));
 
 import router from './routes.js';
 const postgresDB = require('../database/postgres/index.js');
@@ -18,10 +20,8 @@ require('newrelic');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-
 app.get('/rooms/:id', async (req, res) => {
   const roomId = req.params.id;
-  console.log('roomId:', roomId);
   const sheet = new ServerStyleSheet();
   const body = renderToString(sheet.collectStyles(<App roomId={roomId} />));
   const styles = sheet.getStyleTags();
@@ -38,8 +38,12 @@ app.get('/rooms/:id', async (req, res) => {
   );
 });
 
+app.get('/photos-service.js', (req, res) => {
+  res.sendFile(path.resolve('./public/photos-service.js'));
+})
+
 // server routes
-// app.use('/', router);
+app.use('/', router);
 
 // serve the client files
 // app.use('/rooms/:id', express.static(__dirname + '/../public'));

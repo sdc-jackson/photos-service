@@ -43,6 +43,4 @@ Photos.belongsTo(Rooms, {
   foreignKey: 'room_id'
 });
 
-// module.exports.Rooms = Rooms;
-// module.exports.Photos = Photos;
-export default { Rooms, Photos };
+export { Rooms, Photos };
