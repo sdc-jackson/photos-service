@@ -51,15 +51,15 @@ export default class PhotoGrid extends React.Component {
     return (
       <div className = 'photo-grid'>
         <div className = 'flex-container-row'>
-          <img className='responsive-img primary-img' src = {this.state.primaryPhoto} alt = 'Photo Unavailable'/>
+          <img className='responsive-img primary-img' src = {this.state.primaryPhoto} />
           <div className = 'flex-container-column'>
-            <img className='responsive-img secondary-img' src = {this.state.photoTopLeft} alt = 'Photo Unavailable'/>
-            <img className='responsive-img secondary-img' src = {this.state.photoBottomLeft} alt = 'Photo Unavailable'/>
+            <img className='responsive-img secondary-img' src = {this.state.photoTopLeft} />
+            <img className='responsive-img secondary-img' src = {this.state.photoBottomLeft} />
           </div>
           <div className = 'flex-container-column'>
-            <img className='responsive-img secondary-img secondary-img-top' src = {this.state.photoTopRight} alt = 'Photo Unavailable'/>
+            <img className='responsive-img secondary-img secondary-img-top' src = {this.state.photoTopRight} />
             <div className = 'photo-btn-container'>
-              <img className = 'responsive-img secondary-img secondary-img-bottom' src = {this.state.photoBottomRight} alt = 'Photo Unavailable'/>
+              <img className = 'responsive-img secondary-img secondary-img-bottom' src = {this.state.photoBottomRight} />
               <button className = 'photo-btn' onClick={this.handleShowAllPhotosButtonClick.bind(this)}>Show All Photos</button>
             </div>
           </div>
