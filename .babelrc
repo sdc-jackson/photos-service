@@ -1,0 +1,13 @@
+{
+  "presets": ["@babel/preset-react", "@babel/preset-env"],
+  "plugins": [
+    [
+      "babel-plugin-styled-components",
+      {
+        "ssr": true,
+        "namespace": "photos-service"
+      }
+    ],
+    "@babel/plugin-transform-runtime"
+  ]
+}
