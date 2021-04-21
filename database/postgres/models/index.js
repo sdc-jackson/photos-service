@@ -1,5 +1,6 @@
 const { Sequelize, DataTypes } = require('sequelize');
-const db = require('../index.js');
+// const db = require('../index.js');
+import db from '../index.js';
 
 const Rooms = db.define('rooms', {
   room_id: {
@@ -42,5 +43,6 @@ Photos.belongsTo(Rooms, {
   foreignKey: 'room_id'
 });
 
-module.exports.Rooms = Rooms;
-module.exports.Photos = Photos;
+// module.exports.Rooms = Rooms;
+// module.exports.Photos = Photos;
+export default { Rooms, Photos };

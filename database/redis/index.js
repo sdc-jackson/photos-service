@@ -12,7 +12,7 @@ const cache = (req, res, next) => {
   const roomNumber = req.params.id;
   redisClient.get(roomNumber, async (err, reply) => {
     try {
-      if (err) throw err;
+      if (err) return console.log(err);
       if (reply !== null) {
         const data = await JSON.parse(reply);
         res.status(200).send(data)
@@ -26,5 +26,7 @@ const cache = (req, res, next) => {
   });
 }
 
-module.exports.redisClient = redisClient;
-module.exports.cache = cache
+// module.exports.redisClient = redisClient;
+// module.exports.cache = cache;
+
+export { redisClient, cache }

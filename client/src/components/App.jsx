@@ -13,11 +13,13 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-    let url = window.location.href;
-    let urlParts = url.split('/');
+    // let url = window.location.href;
+    // let urlParts = url.split('/');
+    let roomId = this.props.roomId
     this.setState({
-      roomId: urlParts[4]
+      roomId: roomId
     });
+    console.log('hello?')
   }
 
   showModal() {
@@ -35,6 +37,8 @@ export default class App extends React.Component {
   render() {
     return (
       <div>
+        <div>state: {this.state.roomId}</div>
+        <div>props: {this.props.roomId}</div>
         <PhotoGrid roomId={this.state.roomId} showModal = {this.showModal.bind(this)}/>
         <div style={{display: this.state.modalDisplay}}>
           <PhotosModal roomId={this.state.roomId} hideModal = {this.hideModal.bind(this)}/>

@@ -1,5 +1,5 @@
 const { Sequelize } = require('sequelize');
-const { config } = require('../../config.js');
+import { config } from '../../config.js';
 const { postgresDB: { host, db_name, user, pass } } = config;
 
 const pgConfig = {
@@ -11,8 +11,8 @@ const pgConfig = {
   host: host,
   dialect: 'postgres',
 }
-
-const db = new Sequelize(db_name, user, pass, pgConfig);
+const login = `postgres://${user}:${pass}@${host}:5432/${db_name}`;
+const db = new Sequelize(login, pgConfig);
 
 (async () => {
   try {
@@ -23,4 +23,4 @@ const db = new Sequelize(db_name, user, pass, pgConfig);
   }
 })();
 
-module.exports = db;
+export default db;

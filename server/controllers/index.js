@@ -37,4 +37,5 @@ const deletePhoto = (req, res) => {
     .catch(err => res.status(500).send(err))
 };
 
-module.exports = {getPhotos, addPhoto, updatePhoto, deletePhoto};
+module.exports = { getPhotos, addPhoto, updatePhoto, deletePhoto };
+// export default { getPhotos, addPhoto, updatePhoto, deletePhoto }
