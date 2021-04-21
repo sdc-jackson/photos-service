@@ -10,6 +10,8 @@
   "scripts": {
     "build": "webpack -d --watch",
     "prod-build": "webpack --mode=production",
+    "ssr-build": "NODE_ENV=development webpack --config webpack.server.js --mode=development --watch",
+    "ssr-start": "nodemon public/photos-service-ssr.js",
     "start": "nodemon server",
     "pg-seeder": "node ./database/seeders/postgresSeeder.js",
     "couchdb-seeder": "node ./database/seeders/couchdbSeeder.js",
@@ -24,6 +26,7 @@
     "axios": "^0.21.1",
     "babel-plugin-styled-components": "^1.12.0",
     "dotenv": "^8.2.0",
+    "dotenv-webpack": "^7.0.2",
     "express": "^4.17.1",
     "jquery": "^3.1.1",
     "mocha": "^8.2.1",
@@ -36,7 +39,8 @@
     "redis": "^3.1.1",
     "sequelize": "^6.5.0",
     "sequelize-cli": "^6.2.0",
-    "styled-components": "^5.2.3"
+    "styled-components": "^5.2.3",
+    "webpack-node-externals": "^2.5.2"
   },
   "devDependencies": {
     "@babel/core": "^7.4.0",
