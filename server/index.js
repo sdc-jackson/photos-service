@@ -42,6 +42,10 @@ app.get('/photos-service.js', (req, res) => {
   res.sendFile(path.resolve('./public/photos-service.js'));
 })
 
+app.get('/photos-service-ssr.js', (req, res) => {
+  res.sendFile(path.resolve('./public/photos-service-ssr.js'));
+})
+
 // server routes
 app.use('/', router);
 
