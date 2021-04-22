@@ -7,7 +7,7 @@ const warmUp = async (params) => {
   console.log('running redis cache warm up');
   await db.authenticate();
 
-  while (params <= 9250000) {
+  while (params <= 9125000) {
     console.log(params)
 
     try {
